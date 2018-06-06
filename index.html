@@ -1,13 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Alessandra</title>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-</head>
-<body>
-  <h1>Salam, nice to meet you</h1>
-  </body>
+<html ng-app="myApp">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width"/>
+    <meta name="apple-mobile-web-app-title" content="Alessandra"> 
+    <meta name='apple-mobile-web-app-capable' content='yes'>
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name='apple-touch-fullscreen' content='yes'>
+    <meta name='format-detection' content='telephone=no'>
+    <meta name="viewport" content="width=320">
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta name="viewport" content="width=320.1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta property="fb:app_id" content="333246047199259" />
+    <link rel="icon" href="/blog/assets/img/icons/apple-icon-57x57.png" sizes="57x57" type="image/png">
+    <link rel="apple-touch-icon" sizes="57x57" href="/blog/assets/img/icons/apple-icon-57x57.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="/blog/assets/img/icons/apple-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="blog/assets/img/icons/apple-icon-144x144.png"/>
+    <link rel="apple-touch-icon" sizes="144x144" href="/blog/assets/img/icons/apple-icon-144x144.png"/>
+    <link rel="manifest" href="icons/Manifest.json">     
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff"> 
+    <title>Alessandra
+    </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link href="/blog/assets/css/main.css" rel="stylesheet"/>
+  </head>
+    <body class="animated fadeIn">
+      <ng-view>
+      </ng-view>
+      <footer class="footer">
+        <div class="container-fluid">
+          <span class="text-muted text-center">
+            <a href="#/!">
+              <img class="d-inline-block asyncImage align-middle img-fluid logo-footer" src="https://alessandraaruby.github.io/blog/assets/img/logo.png" data-src="/blog/assets/img/logo.png"/>
+            </a>
+          </span>
+        </div>
+      </footer>
+      <!-- javascripts -->
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js"   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous">
+      </script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js">
+      </script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/0.9.84/jsrender.min.js">
+      </script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js">
+      </script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js">
+      </script>
+      <script src="https://alessandraaruby.github.io/blog/assets/js/main.js">
+      </script>
+    </body>
 </html>
