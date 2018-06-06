@@ -6,7 +6,7 @@ var article = [
     "author": "Alessandra",
     "title": "Miracle on Animals",
     "desc": ["Find out the list of Animals that mentioned in the Quran & Hadith...."],
-    "img": "/blog/html/contents/miracles-on-animal/image.jpg",
+    "img": "/html/contents/miracles-on-animal/image.jpg",
     "link": "#!animals"
   },
   {
@@ -15,7 +15,7 @@ var article = [
     "author": "Alessandra",
     "title": "Quranic Duas",
     "desc": ["Useful duas or supplications from the Quran..."],
-    "img": "/blog/html/contents/quranic-dua/image.jpg",
+    "img": "/html/contents/quranic-dua/image.jpg",
     "link": "#!quranicdua"
   },
   {
@@ -24,7 +24,7 @@ var article = [
     "author": "Alessandra",
     "title": "Facebook Scumbag",
     "desc": ["Amirah is an Asian come from the poor country Philippine who created many fake Facebook accounts...."],
-    "img": "/blog/html/contents/facebook-scumbag/image.jpg",
+    "img": "/html/contents/facebook-scumbag/image.jpg",
     "link": "#!fbscams"
   }
 ];
