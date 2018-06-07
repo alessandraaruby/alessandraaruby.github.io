@@ -1,5 +1,5 @@
 var app = angular.module("myApp", ["ngRoute"]);
-app.config(function($routeProvider, $locationProvider) {
+app.config(function($routeProvider) {
     $routeProvider
     .when("/", {
         templateUrl : "html/pages/main.html",
@@ -56,8 +56,6 @@ app.config(function($routeProvider, $locationProvider) {
         controller: 'Error404Controller',
         templateUrl: 'html/pages/error.html'
     });
-
-    $locationProvider.html5Mode(true);
 
 });
 
