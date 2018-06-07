@@ -7,7 +7,7 @@ var article = [
     "title": "Miracle on Animals",
     "desc": ["Find out the list of Animals that mentioned in the Quran & Hadith...."],
     "img": "/html/contents/miracles-on-animal/image.jpg",
-    "link": "#!animals"
+    "link": "https://alessandraaruby.github.io/#!animals"
   },
   {
     "id": "quranicdua",
@@ -16,7 +16,7 @@ var article = [
     "title": "Quranic Duas",
     "desc": ["Useful duas or supplications from the Quran..."],
     "img": "/html/contents/quranic-dua/image.jpg",
-    "link": "#!quranicdua"
+    "link": "https://alessandraaruby.github.io/#!quranicdua"
   },
   {
     "id": "fake",
@@ -25,7 +25,7 @@ var article = [
     "title": "Facebook Scumbag",
     "desc": ["Amirah is an Asian come from the poor country Philippine who created many fake Facebook accounts...."],
     "img": "/html/contents/facebook-scumbag/image.jpg",
-    "link": "#!fbscams"
+    "link": "https://alessandraaruby.github.io/#!fbscams"
   }
 ];
 var template = $.templates("#articles");
