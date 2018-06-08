@@ -1,2 +1,2 @@
 RewriteEngine On
-RewriteRule ^$ https://alessandraaruby.github.io/blog/app [L]
+RewriteRule ^blog(.*)/$ app/ [L,QSA]
