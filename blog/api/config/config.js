@@ -1,7 +1,7 @@
 var config = {};
 
 config.blogName = 'myBlog';
-config.url = 'https://alessandraaruby.github.io/';
+config.url = 'https://alessandraaruby.github.io/blog';
 
 config.rss = {
   title:        'My RSS Feed',
