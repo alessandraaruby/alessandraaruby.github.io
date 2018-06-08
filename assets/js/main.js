@@ -56,6 +56,7 @@ app.config(function($routeProvider) {
         controller: 'Error404Controller',
         templateUrl: 'html/pages/error.html'
     });
+
 });
 
 //Collapsing Navbar Menu
