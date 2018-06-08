@@ -1,13 +1,13 @@
 var config = {};
 
 config.blogName = 'myBlog';
-config.url = 'http://localhost/';
+config.url = 'https://alessandraaruby.github.io/blog/app';
 
 config.rss = {
   title:        'My RSS Feed',
   description:  'LoremIpsum',
-  link:         'http://mySite.fr',
-  image:        'http://mySite.fr/logo.png',
+  link:         'https://alessandraaruby.github.io/blog/app',
+  image:        'https://alessandraaruby.github.io/assets/img/logo.png',
   copyright:     'Copyright © 2013 John Doe. All rights reserved'
 };
 
