@@ -26,7 +26,6 @@
     <div class="text-muted">
     <p><small>By {{:author}} at {{:date}}</small></p>
 <ul class="list-inline">
-  <li class="list-inline-item"><div class="fb-like" data-href="{{:link}}" data-width="70" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div></li>
   <li class="list-inline-item"><a href="{{:link}}" class="card-link">Continue reading <i class="fas fa-angle-right align-middle"></i></a></li>
 </ul>
     </div>
@@ -35,12 +34,5 @@
  </div>
 </script>
   <script src="assets/js/articles.js"></script>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id; js.async=true; 
-  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0&appId=333246047199259&autoLogAppEvents=1';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+
 </body>
