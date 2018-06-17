@@ -2,12 +2,12 @@
 <div class="container container-content">
   <div class="row">
     <div class="col-sm" v-for="item in list" :key="item.id">
-     <div class="card bg-dark text-white">
-      <img class="card-img" :src="item.imageURL">
-      <div class="card-img-overlay">
-      <h5 class="card-title">{{ item.title }}</h5>
-      <p class="card-text">{{ item.shortDesc }}</p>
-      <p class="card-text text-sm"><small>Last updated at {{ item.date }} by {{ item.author }}</small></p>
+<div class="card mb-3">
+  <img class="card-img-top" :src="item.imageURL">
+  <div class="card-body">
+    <h5 class="card-title">{{ item.title }}</h5>
+    <p class="card-text">{{ item.shortDesc }}</p>
+    <p class="card-text"><small class="text-muted">Last updated {{ item.date }}</small></p>
                 <v-btn flat class="btn btn-secondary"
               :to="
                   {
@@ -23,6 +23,7 @@
             </v-btn>
   </div>
 </div>
+
 
     </div>
   </div>

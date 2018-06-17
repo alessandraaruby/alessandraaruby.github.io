@@ -1,7 +1,7 @@
 <template>
-    <v-container class="mt-0">
+ <div class="container container-content">
     {{ title }}
-    </v-container>
+ </div>
 </template>
 <script>
   define([], function()
@@ -9,7 +9,7 @@
     return Vue.extend({
       template,
       data:() => ({
-        title: "Profile Info"
+        title: "About us"
       })
     });
   });

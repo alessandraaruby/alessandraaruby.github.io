@@ -1,6 +1,6 @@
 <template>
  <v-app>
- <nav class="navbar navbar-light bg-light">
+ <nav class="navbar navbar-light bg-light fixed-top">
         <router-link to="/" class="navbar-brand" tag="span" style="cursor: pointer">
           {{ appName }}
         </router-link>

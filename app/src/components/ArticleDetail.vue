@@ -1,6 +1,5 @@
 <template>
-  <v-container class="container-content">
-
+  <div class="container">
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><v-btn flat to="/">Home</v-btn></li>
@@ -8,29 +7,15 @@
     <li class="breadcrumb-item active" aria-current="page"><v-btn>{{ item.title }}</v-btn></li>
   </ol>
 </nav>
-
-    <v-layout row wrap>
-      <v-flex xs12>
-        <v-card tile>
-          <v-card-media :src="item.imageURL" contain>
-          </v-card-media>
-         <img class="img-fluid" src="{{item.imageURL}}"/>
-          <v-card-title primary-title>
-            <div>
-              <h3 class="headline">{{ item.title }}</h3>
-
-              <v-flex xs12 class="pl-0">
-                  <span class="body-1">{{ item.date }}</span>
-              </v-flex>
-
-              <div v-if="item.desc" v-html="item.desc"></div>
-            </div>
-
-          </v-card-title>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <div class="content-title"><h3>{{ item.title }}</h3></div>
+   <p><small>Last updated at {{ item.date }} by {{ item.author }}</small></p>
+   <div class="featured-post">
+    <img class="img-fluid" :src="item.imageURL">
+   </div>
+    <div class="content-post">
+     <div v-if="item.desc" v-html="item.desc"></div>
+    </div>
+  </div>
 </template>
 <script>
  define([], function()
@@ -45,19 +30,5 @@
  });
 </script>
 <style>
-@media only screen and (max-width: 320px) {  
-  .mycarousel {
-    height:100px;
-  }
-}
-@media only screen and (max-width: 600px) {  
-  .mycarousel {
-    height:250px;
-  }
-}
-@media only screen and (max-width: 961px) {  
-  .mycarousel {
-    height:350px;
-  }
-}
+
 </style>
