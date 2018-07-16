@@ -6,7 +6,7 @@ var article = [
     "author": "Alessandra",
     "title": "Facebook Catfishers",
     "desc": ["Amirah is an Asian come from the poor country Philippine who created many fake Facebook accounts...."],
-    "img": "/html/contents/facebook-scumbag/image.jpg",
+    "img": "/html/contents/facebook-catfishers/image.jpg",
     "link": "https://alessandraaruby.github.io/#!fbscams"
   }
 ];
