@@ -21,34 +21,34 @@ app.config(function($routeProvider) {
         templateUrl : "html/contents/quranic-dua/index.html"
     })
     .when("/fbscams", {
-        templateUrl : "html/contents/facebook-scumbag/index.html"
+        templateUrl : "html/contents/facebook-catfishers/index.html"
     })
     .when("/fakelucas", {
-        templateUrl : "html/contents/facebook-scumbag/html/lucas/index.html"
+        templateUrl : "html/contents/facebook-catfishers/html/lucas/index.html"
     })
     .when("/fakezahra", {
-        templateUrl : "html/contents/facebook-scumbag/html/zahra/index.html"
+        templateUrl : "html/contents/facebook-catfishers/html/zahra/index.html"
     })
     .when("/fakenadine", {
-        templateUrl : "html/contents/facebook-scumbag/html/nadine/index.html"
+        templateUrl : "html/contents/facebook-catfishers/html/nadine/index.html"
     })
     .when("/fakekike", {
-        templateUrl : "html/contents/facebook-scumbag/html/enrique/index.html"
+        templateUrl : "html/contents/facebook-catfishers/html/enrique/index.html"
     })
     .when("/fakerama", {
-        templateUrl : "html/contents/facebook-scumbag/html/rama/index.html"
+        templateUrl : "html/contents/facebook-catfishers/html/rama/index.html"
     })
     .when("/fakeshirouk", {
-        templateUrl : "html/contents/facebook-scumbag/html/shirouk/index.html"
+        templateUrl : "html/contents/facebook-catfishers/html/shirouk/index.html"
     })
     .when("/fakejack", {
-        templateUrl : "html/contents/facebook-scumbag/html/jack/index.html"
+        templateUrl : "html/contents/facebook-catfishers/html/jack/index.html"
     })
     .when("/fakeamirah", {
-        templateUrl : "html/contents/facebook-scumbag/html/amirah/index.html"
+        templateUrl : "html/contents/facebook-catfishers/html/amirah/index.html"
     })
     .when("/model", {
-        templateUrl : "html/contents/facebook-scumbag/html/model/index.html"
+        templateUrl : "html/contents/facebook-catfishers/html/model/index.html"
     })
 
     //other whens removed
