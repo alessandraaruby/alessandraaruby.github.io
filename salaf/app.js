@@ -5,8 +5,8 @@ angular.module('myapp', ["ui.router","ngAnimate"])
       $urlRouterProvider.otherwise('/admin')
       
       $stateProvider
-        .state('admin', {
-          url: '/admin',
+        .state('home', {
+          url: '/home',
           templateUrl: 'admin.html'
         })
         .state('populations', {
