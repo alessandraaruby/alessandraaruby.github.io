@@ -2,7 +2,7 @@ angular.module('myapp', ["ui.router","ngAnimate"])
 .config(function($stateProvider, $urlRouterProvider){
       
       // For any unmatched url, send to /populations
-      $urlRouterProvider.otherwise('/admin')
+      $urlRouterProvider.otherwise('/home')
       
       $stateProvider
         .state('home', {
