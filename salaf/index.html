@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+
+<head>
+  <title>AngularJS: UI-Router Quick Start</title>
+  <!-- Bootstrap CSS -->
+
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+  <style type="text/css">
+    [animate] {
+      -webkit-transition: opacity 1s ease-in-out; /* For Safari 3.1 to 6.0 */
+      transition: opacity 1s ease-in-out;
+      opacity: 0;
+    }
+    [animate].animate {
+      opacity: 1;
+    }
+  </style>
+  
+</head>
+
+<body>
+  <div class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Administration</a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a ui-sref="populations">Populations</a></li>
+          <li><a ui-sref="personnel">Personnel</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+
+  <div class="container">
+    <div ui-view></div>
+  </div>
+
+  <!-- Angular -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
+  <!-- UI-Router -->
+  <script src="https://angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
+  <!-- Animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular-animate.js"></script>
+
+  <!-- App Script -->
+  <script src="app.js"></script>
+</body>
+
+</html>
