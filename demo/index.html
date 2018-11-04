@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Hello, world!</title>
+<style>
+.container-fluid {margin-top:30px; margin-bottom:30px;}
+</style>
+  </head>
+<body>
+
+<div class="container-fluid">
+<div id="largeVideoItem"></div>
+<div id="smallVideoItems"></div>
+<div class="card-deck" id="smallVideoItemsUL"></div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script>
+var LargeVideoItem = document.getElementById('largeVideoItem');
+var SmallerVideoItems = document.getElementById('smallVideoItemsUL');
+var openUL=true;
+var closeUL=false;
+
+function loadJSON(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                callback(JSON.parse(xhr.responseText));
+            } else {
+               //  callback([{}]);
+            }
+        }
+    };
+    xhr.send();
+}
+
+function anchor_test() {
+	window.alert("This is an anchor test.")
+}
+
+function loadYouTubePlaylist() {
+		// You will need to provide the following:
+		// Playlist ID:  my sample is UUnlusBKXb9NO_VYOya5OXNA
+		// A Youtube API - the one here only works on my site.  You'll need to get your own.  Look here for directions:  https://developers.google.com/youtube/v3/getting-started
+    loadJSON('https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=40&playlistId=UUnlusBKXb9NO_VYOya5OXNA&key=AIzaSyDADBrjzVrrH2IoN4SFOp3YhefA8GaX6Bk', function (e) {
+        if (e.items) {
+            for (i = 0; i < e.items.length; i++) { 
+                if (i==0)
+                {
+                    writeBigScreenVideo(e.items[i]);
+                    writeThumbnailVideo(e.items[i]);
+                }
+                else
+                {
+                    if (i==e.items.length-1){closeUL=true;}
+                    writeThumbnailVideo(e.items[i]);
+                }
+            }
+        }
+        else
+        	{
+        		alert('No data returned');
+        	}
+    });
+}
+
+function writeBigScreenVideo(item) {
+    var myTitle = item.snippet.title || 'default';
+    var myID = item.snippet.resourceId.videoId || 'default';
+    var myDesc = item.snippet.description || [];
+    var myThumb = item.snippet.thumbnails.standard.url || [];
+   //  var myURL = item.video.player.default || [];
+    LargeVideoItem.innerHTML += '<div class="card" data-keepratio="true"><div class="card-body"><iframe width="100%" height="450" src="//www.youtube.com/embed/'+myID+'?rel=0" frameborder="0" allowfullscreen></iframe></div></div><br/>';
+    
+    //LargeVideoItem.innerHTML += myTitle + '<br/>'+myDesc + '<br/>'+myThumb + '<br/>'+myURL;
+    
+}
+function writeThumbnailVideo(item) {
+    //if (openUL) {openUL=false;SmallerVideoItems.innerHTML+='<div class="videoSmallThumb"><ul>'}
+    var myTitle = item.snippet.title || 'default';
+    var myID = item.snippet.resourceId.videoId || 'default';
+    var myDesc = item.snippet.description || [];
+    var myThumb = item.snippet.thumbnails.standard.url || [];
+   
+    SmallerVideoItems.innerHTML+= '<div class="card"><a href="#" onclick="replaceMainVideo(\''+myID+'\');" rel="external nofollow" title="'+myTitle+'"><img class="card-img-top" src="'+myThumb+'" alt="'+myTitle+'"><div class="card-body"><h5 class="card-title">'+myTitle+'</h5></a></div></div>';
+    //if (closeUL) {closeUL=false;SmallerVideoItems.innerHTML+='</div>';}
+}
+
+function validate() {
+	return prompt("Are you sure you want to exit this page?");
+    return false;
+}
+
+function replaceMainVideo(videoID){
+	LargeVideoItem.innerHTML = '<div class="uccVideos-bigscreen" data-keepratio="true"><h3 class="play3"><div class="uccVideos-bigscreen-inner"><iframe width="100%" height="450" src="//www.youtube.com/embed/'+videoID+'?rel=0&autoplay=1"  frameborder="0" allowfullscreen></iframe></div></h3></div>';
+	return true;
+}
+
+var body = document.getElementsByTagName("body")[0];
+body.addEventListener("load", loadYouTubePlaylist(), false);
+</script>
+
+</body>
+</html>
