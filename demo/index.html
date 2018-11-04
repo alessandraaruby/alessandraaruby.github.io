@@ -53,7 +53,7 @@ function loadYouTubePlaylist() {
 		// You will need to provide the following:
 		// Playlist ID:  my sample is UUnlusBKXb9NO_VYOya5OXNA
 		// A Youtube API - the one here only works on my site.  You'll need to get your own.  Look here for directions:  https://developers.google.com/youtube/v3/getting-started
-    loadJSON('https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=40&playlistId=UUnlusBKXb9NO_VYOya5OXNA&key=AIzaSyDgYjFZgTxK6mDUpGm5y2u9XcccEX4yDGg', function (e) {
+    loadJSON('https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=10&playlistId=UUnlusBKXb9NO_VYOya5OXNA&key=AIzaSyDgYjFZgTxK6mDUpGm5y2u9XcccEX4yDGg', function (e) {
         if (e.items) {
             for (i = 0; i < e.items.length; i++) { 
                 if (i==0)
