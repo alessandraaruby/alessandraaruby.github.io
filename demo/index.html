@@ -13,11 +13,9 @@
   </head>
 <body>
 
-<div class="container">
-<div id="largeVideoItem"></div>
-<div id="smallVideoItems"></div>
-<div class="card-deck" id="smallVideoItemsUL"></div>
-
+<div class="container" id="wrapper">
+	<iframe id="yt_player"></iframe>
+	<div id="yt_list"></div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -25,91 +23,155 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 <script>
-var LargeVideoItem = document.getElementById('largeVideoItem');
-var SmallerVideoItems = document.getElementById('smallVideoItemsUL');
-var openUL=true;
-var closeUL=false;
+var default_user_name = "thepurereligion";
+selectChannel(default_user_name);
+/* API shits */
+function selectChannel(user_name) {
+	$.ajax({
+		url: "https://www.googleapis.com/youtube/v3/channels",
+		type: "GET",
+		dataType: "json",
+		data: {
+			part: "contentDetails",
+			forUsername: user_name,
+			key: $("meta[name=yt-api-k]").attr("value")
+		},
+		success: function(d) {
+			$("#yt_list").html("");
+			if (d.pageInfo.totalResults > 0) {
+				console.dir(d.items);
+				for (let item of d.items) {
+					var uploads = item.contentDetails.relatedPlaylists.uploads;
+					getVideos(uploads);
+				}
+			} else {
+				$("input#user_name").addClass("error");
+				$("div#channel_input > .info")
+					.show()
+					.html("This user not exists");
+			}
+		},
+		error: function(x) {
+			console.dir(x);
+		}
+	});
+}
+function getVideos(yt_id, next_page = "") {
+	var limit = 10;
+	var more = "";
+	var xhr = $.ajax({
+		url: "https://www.googleapis.com/youtube/v3/playlistItems",
+		type: "GET",
+		dataType: "json",
+		data: {
+			part: "snippet",
+			playlistId: yt_id,
+			maxResults: limit,
+			pageToken: next_page,
+			key: $("meta[name=yt-api-k]").attr("value")
+		},
+		success: function(data) {
+			console.dir(data);
+			if (data.nextPageToken) {
+				console.log(data.nextPageToken);
+				more =
+					'<button id="load-more" data-next-page="' +
+					data.nextPageToken +
+					'" data-yt-id="' +
+					yt_id +
+					'">...</button>';
+			}
 
-function loadJSON(url, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                callback(JSON.parse(xhr.responseText));
-            } else {
-               //  callback([{}]);
-            }
-        }
-    };
-    xhr.send();
+			if (next_page === "") {
+				$("#yt_player").attr(
+					"src",
+					"https://youtube.com/embed/" +
+						data.items[0].snippet.resourceId.videoId +
+						"?controls=0&showinfo=0&rel=0"
+				);
+			}
+			for (var i = 0; i < limit; i++) {
+				var title = $("<h3>").append(data.items[i].snippet.title);
+				var thumb = $("<img>").attr(
+					"src",
+					data.items[i].snippet.thumbnails.medium.url
+				);
+				var video_id = data.items[i].snippet.resourceId.videoId;
+				var link = $("<a class='video-link' href='#'>")
+					.data("videoid", video_id)
+					.append(thumb);
+				var holder = $("<div class='item'>").append(link, title);
+				$("#yt_list").append(holder);
+			}
+			$("#yt_list").append(more);
+		}
+	});
+	console.dir(xhr);
 }
 
-function anchor_test() {
-	window.alert("This is an anchor test.")
-}
+/* load more shits */
+$("#yt_list").on("click", "#load-more", function() {
+	$(this)
+		.animate(
+			{
+				"transform":"scaleX(4)",
+				"opacity":"0.1"
+			},
+			function(){
+				getVideos($(this).data("yt-id"), $(this).data("next-page"));
+				$(this).remove();
+			});
+});
 
-function loadYouTubePlaylist() {
-		// You will need to provide the following:
-		// Playlist ID:  my sample is UUnlusBKXb9NO_VYOya5OXNA
-		// A Youtube API - the one here only works on my site.  You'll need to get your own.  Look here for directions:  https://developers.google.com/youtube/v3/getting-started
-    loadJSON('https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=10&playlistId=UUnlusBKXb9NO_VYOya5OXNA&key=AIzaSyDADBrjzVrrH2IoN4SFOp3YhefA8GaX6Bk', function (e) {
-        if (e.items) {
-            for (i = 0; i < e.items.length; i++) { 
-                if (i==0)
-                {
-                    writeBigScreenVideo(e.items[i]);
-                    writeThumbnailVideo(e.items[i]);
-                }
-                else
-                {
-                    if (i==e.items.length-1){closeUL=true;}
-                    writeThumbnailVideo(e.items[i]);
-                }
-            }
-        }
-        else
-        	{
-        		alert('No data returned');
-        	}
-    });
-}
+/* embeds shits */
+$("#yt_list").on("click", "a.video-link", function() {
+	var video_id = $(this).data("videoid");
+	$("#yt_player").attr(
+		"src",
+		"https://youtube.com/embed/" +
+			video_id +
+			"?controls=0&showinfo=0&rel=0&autoplay=1"
+	);
+});
 
-function writeBigScreenVideo(item) {
-    var myTitle = item.snippet.title || 'default';
-    var myID = item.snippet.resourceId.videoId || 'default';
-    var myDesc = item.snippet.description || [];
-    var myThumb = item.snippet.thumbnails.standard.url || [];
-   //  var myURL = item.video.player.default || [];
-    LargeVideoItem.innerHTML += '<div class="card" data-keepratio="true"><div class="card-body"><iframe width="100%" height="450" src="//www.youtube.com/embed/'+myID+'?rel=0" frameborder="0" allowfullscreen></iframe></div></div><br/>';
-    
-    //LargeVideoItem.innerHTML += myTitle + '<br/>'+myDesc + '<br/>'+myThumb + '<br/>'+myURL;
-    
-}
-function writeThumbnailVideo(item) {
-    //if (openUL) {openUL=false;SmallerVideoItems.innerHTML+='<div class="videoSmallThumb"><ul>'}
-    var myTitle = item.snippet.title || 'default';
-    var myID = item.snippet.resourceId.videoId || 'default';
-    var myDesc = item.snippet.description || [];
-    var myThumb = item.snippet.thumbnails.standard.url || [];
-   
-    SmallerVideoItems.innerHTML+= '<div class="card"><a href="#" onclick="replaceMainVideo(\''+myID+'\');" rel="external nofollow" title="'+myTitle+'"><img class="card-img-top" src="'+myThumb+'" alt="'+myTitle+'"><div class="card-body"><h5 class="card-title">'+myTitle+'</h5></a></div></div>';
-    //if (closeUL) {closeUL=false;SmallerVideoItems.innerHTML+='</div>';}
-}
+/* UI shits */
+$("#user_name").on({
+	keyup: function(e) {
+		$(this).removeClass("error");
+		$("div#channel_input > .info")
+			.hide()
+			.html("");
+		if (e.keyCode === 13) {
+			selectChannel($(this).val());
+		}
+	},
+	click: function() {
+		$(this).removeClass("error");
+		$("div#channel_input > .info")
+			.hide()
+			.html("");
+		$("#user_name").select();
+	}
+});
+$("#sbm").on("click", function() {
+	selectChannel($("#user_name").val());
+});
+$(window).on("load", function() {
+	$("#user_name").val(default_user_name);
+	$("#user_name").focus();
+});
+// lazy load
+$("#yt_list").on("scroll", function() {
+	if (
+		Math.round($(this).scrollTop() + $(this).innerHeight(), 10) >=
+		Math.round($(this)[0].scrollHeight, 10) - 5
+	) {
+		$("#load-more").trigger("click");
+	}
+});
 
-function validate() {
-	return prompt("Are you sure you want to exit this page?");
-    return false;
-}
-
-function replaceMainVideo(videoID){
-	LargeVideoItem.innerHTML = '<div class="uccVideos-bigscreen" data-keepratio="true"><h3 class="play3"><div class="uccVideos-bigscreen-inner"><iframe width="100%" height="450" src="//www.youtube.com/embed/'+videoID+'?rel=0&autoplay=1"  frameborder="0" allowfullscreen></iframe></div></h3></div>';
-	return true;
-}
-
-var body = document.getElementsByTagName("body")[0];
-body.addEventListener("load", loadYouTubePlaylist(), false);
 </script>
+
 
 </body>
 </html>
