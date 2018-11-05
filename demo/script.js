@@ -71,9 +71,9 @@ function getVideos(yt_id, next_page = "") {
 				var link = $("<a class='video-link' data-toggle='modal' data-target='#videoModal'></a>")
 					.data("videoid", video_id)
 					.append(thumb);
-				var title = $("<h5 class='card-footer'></h5>").append(data.items[i].snippet.title);
+				var title = $("<div class='card-footer text-muted'></div>").append(data.items[i].snippet.title);
 				var description = $("<p class='card-text'></p>").append(data.items[i].snippet.description);
-				var holder = $("<span>").append(link, title);
+				var holder = $("<span></span>").append(link, title);
 				$("#yt_list").append(holder);
 			}
 			$("#yt_list").append(more);
