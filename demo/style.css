@@ -1,4 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css?family=Comfortaa|Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Comfortaa|Open+Sans');
 @import url('https://use.fontawesome.com/releases/v5.0.13/css/all.css');
 
 html {
@@ -27,9 +27,7 @@ a {
   background: #ffffff !important;
   color: #000000!important;
 }
-.navbar-brand{
-  font-size:18px;
-}
+
 .navbar-toggler {
    border: 0px;
 }
@@ -44,6 +42,7 @@ a {
 }
 .card, #load-more {margin-top:20px;}
 .card-title {margin-top:20px; text-align:center;}
+.videolist {margin-bottom:24px;}
 #yt_player {
 	position: absolute;
 	width: 100%;
@@ -62,4 +61,5 @@ a {
   height: auto;
   min-height: 100%;
   border-radius: 0;
-  border: none; }
+  border: none; 
+}
