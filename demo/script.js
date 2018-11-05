@@ -63,7 +63,7 @@ function getVideos(yt_id, next_page = "") {
 				);
 			}
 			for (var i = 0; i < limit; i++) {
-				var thumb = $("<img class='card-img-top'/>").attr(
+				var thumb = $("<img class='img-fluid card-img-top'/>").attr(
 					"src",
 					data.items[i].snippet.thumbnails.medium.url
 				);
