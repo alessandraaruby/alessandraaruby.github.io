@@ -1,0 +1,65 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Comfortaa|Open+Sans');
+@import url('https://use.fontawesome.com/releases/v5.0.13/css/all.css');
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 60px;
+  background: #fafafa;
+  font-family: 'Open Sans', sans-serif;
+}
+h1 {
+  font-family: 'Comfortaa', cursive;
+}
+h2 {
+  font-size: 150%;
+}
+a {
+  color: #ff6b6b;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+.navbar, .navbar-light .bg-light{
+  border-radius: 0px;
+  background: #ffffff !important;
+  color: #000000!important;
+}
+.navbar-brand{
+  font-size:18px;
+}
+.navbar-toggler {
+   border: 0px;
+}
+
+.collapse, .container {
+  margin-top:70px;
+}
+.card {
+  border-radius:0px;
+  border:0;
+  margin-bottom:10px;
+}
+.card, #load-more {margin-top:20px;}
+.card-title {margin-top:20px; text-align:center;}
+#yt_player {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+.modal.modal-fullscreen .modal-dialog {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  max-width: none; }
+
+.modal.modal-fullscreen .modal-content {
+  height: auto;
+  min-height: 100%;
+  border-radius: 0;
+  border: none; }
