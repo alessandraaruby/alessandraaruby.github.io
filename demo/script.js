@@ -1,4 +1,4 @@
-﻿var default_user_name = "thepurereligion";
+var default_user_name = "thepurereligion";
 selectChannel(default_user_name);
 /* API */
 function selectChannel(user_name) {
@@ -73,7 +73,7 @@ function getVideos(yt_id, next_page = "") {
 					.append(thumb);
 				var title = $("<div class='card-footer text-muted'></div>").append(data.items[i].snippet.title);
 				var description = $("<p class='card-text'></p>").append(data.items[i].snippet.description);
-				var holder = $("<span></span>").append(link, title);
+				var holder = $("<div class='videolist'>").append(link, title);
 				$("#yt_list").append(holder);
 			}
 			$("#yt_list").append(more);
