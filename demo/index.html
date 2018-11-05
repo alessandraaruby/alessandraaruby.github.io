@@ -60,7 +60,18 @@ a {
 	top: 0;
 	left: 0;
 }
+.modal.modal-fullscreen .modal-dialog {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  max-width: none; }
 
+.modal.modal-fullscreen .modal-content {
+  height: auto;
+  min-height: 100%;
+  border-radius: 0;
+  border: none; }
 </style>
   </head>
 <body>
@@ -119,7 +130,7 @@ Shaykh Abdulrahman Al-Haazimi.</p>
 
 </div>
 
-<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
+<div class="modal fade modal-fullscreen" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body">
