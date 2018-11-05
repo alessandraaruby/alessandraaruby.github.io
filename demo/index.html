@@ -5,74 +5,11 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	  <meta name="yt-api-k" value="AIzaSyCQR3Abk6Vn4JflLNKReWWXC-1pJNwnlLI">
-    <!-- Bootstrap CSS -->
+    <meta name="yt-api-k" value="AIzaSyCQR3Abk6Vn4JflLNKReWWXC-1pJNwnlLI">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="style.css">
     <title>Abdullah Abu Jouhaina Hallmans</title>
-<style>
-@import url('https://fonts.googleapis.com/css?family=Comfortaa|Open+Sans');
-@import url('https://use.fontawesome.com/releases/v5.0.13/css/all.css');
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-body {
-  margin-bottom: 60px;
-  background: #fafafa;
-  font-family: 'Open Sans', sans-serif;
-}
-h1 {
-  font-family: 'Comfortaa', cursive;
-}
-h2 {
-  font-size: 150%;
-}
-a {
-  color: #ff6b6b;
-  font-weight: bold;
-  text-decoration: none;
-  cursor: pointer;
-}
-.navbar, .navbar-light .bg-light{
-  border-radius: 0px;
-  background: #ffffff !important;
-  color: #000000!important;
-}
-.navbar-toggler {
-   border: 0px;
-}
-.collapse, .container {
-  margin-top:70px;
-}
-.card {
-  border-radius:0px;
-  border:0;
-  margin-bottom:10px;
-}
-.card, #load-more {margin-top:20px;}
-
-#yt_player {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-}
-.modal.modal-fullscreen .modal-dialog {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  max-width: none; }
-
-.modal.modal-fullscreen .modal-content {
-  height: auto;
-  min-height: 100%;
-  border-radius: 0;
-  border: none; }
-</style>
   </head>
 <body>
 <div class="pos-f-t">
@@ -117,29 +54,35 @@ Shaykh Abdulrahman Al-Haazimi.</p>
   <nav class="navbar navbar-light bg-light fixed-top">
    <a class="navbar-brand" href="index.html">Abu Jouhaina Hallmans</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-     <i class="fas fa-ellipsis-v"></i>
+      <i class="fas fa-ellipsis-v"></i>
     </button>
   </nav>
 </div>
 
 <div class="container">
 
-<div class='card-deck'>
-	<div class="card" id="yt_list"></div>
+<div class="card-group">
+ <div class='card'>
+  <div class='card-body'>
+	<div id="yt_list"></div>
+  </div>
+ </div>
 </div>
 
 </div>
 
-<div class="modal fade modal-fullscreen" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
+<div class="video-link modal fade modal-fullscreen" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true"><i class="fas fa-times fa-1x"></i></span>
+          <span aria-hidden="true"><i class="fas fa-times fa-1x"></i></span> close
         </button>
       </div>
       <div class="modal-body">
-        <div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" id="yt_player"></iframe></div>
+        <div class="embed-responsive embed-responsive-16by9">
+         <iframe class="embed-responsive-item" id="yt_player"></iframe>
+        </div>
       </div>
     </div>
   </div>
@@ -147,157 +90,7 @@ Shaykh Abdulrahman Al-Haazimi.</p>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-<script>
-var default_user_name = "thepurereligion";
-selectChannel(default_user_name);
-/* API shits */
-function selectChannel(user_name) {
-	$.ajax({
-		url: "https://www.googleapis.com/youtube/v3/channels",
-		type: "GET",
-		dataType: "json",
-		data: {
-			part: "contentDetails",
-			forUsername: user_name,
-			key: $("meta[name=yt-api-k]").attr("value")
-		},
-		success: function(d) {
-			$("#yt_list").html("");
-			if (d.pageInfo.totalResults > 0) {
-				console.dir(d.items);
-				for (let item of d.items) {
-					var uploads = item.contentDetails.relatedPlaylists.uploads;
-					getVideos(uploads);
-				}
-			} else {
-				$("input#user_name").addClass("error");
-				$("div#channel_input > .info")
-					.show()
-					.html("This user not exists");
-			}
-		},
-		error: function(x) {
-			console.dir(x);
-		}
-	});
-}
-function getVideos(yt_id, next_page = "") {
-	var limit = 10;
-	var more = "";
-	var xhr = $.ajax({
-		url: "https://www.googleapis.com/youtube/v3/playlistItems",
-		type: "GET",
-		dataType: "json",
-		data: {
-			part: "snippet",
-			playlistId: yt_id,
-			maxResults: limit,
-			pageToken: next_page,
-			key: $("meta[name=yt-api-k]").attr("value")
-		},
-		success: function(data) {
-			console.dir(data);
-			if (data.nextPageToken) {
-				console.log(data.nextPageToken);
-				more =
-					'<button class="btn btn-dark" id="load-more" data-next-page="' +
-					data.nextPageToken +
-					'" data-yt-id="' +
-					yt_id +
-					'">Load more video</button>';
-			}
-
-			if (next_page === "") {
-				$("#yt_player").attr(
-					"src",
-					"https://youtube.com/embed/" +
-						data.items[0].snippet.resourceId.videoId +
-						"?controls=0&showinfo=0&rel=0"
-				);
-			}
-			for (var i = 0; i < limit; i++) {
-				var thumb = $("<img class='card-img-top'>").attr(
-					"src",
-					data.items[i].snippet.thumbnails.medium.url
-				);
-				var title = $("<br/><br/><h5 class='card-title'></h5>").append(data.items[i].snippet.title);
-				var video_id = data.items[i].snippet.resourceId.videoId;
-				var link = $("<a class='video-link' data-toggle='modal' data-target='#videoModal'></a>")
-					.data("videoid", video_id)
-					.append(thumb);
-				var holder = $("<div class='card-body'></div>").append(link, title);
-				$("#yt_list").append(holder);
-			}
-			$("#yt_list").append(more);
-		}
-	});
-	console.dir(xhr);
-}
-
-/* load more shits */
-$("#yt_list").on("click", "#load-more", function() {
-	$(this)
-		.animate(
-			{
-				"transform":"scaleX(4)",
-				"opacity":"0.1"
-			},
-			function(){
-				getVideos($(this).data("yt-id"), $(this).data("next-page"));
-				$(this).remove();
-			});
-});
-
-/* embeds shits */
-$("#yt_list").on("click", "a.video-link", function() {
-	var video_id = $(this).data("videoid");
-	$("#yt_player").attr(
-		"src",
-		"https://youtube.com/embed/" +
-			video_id +
-			"?controls=0&showinfo=0&rel=0&autoplay=1"
-	);
-});
-
-/* UI shits */
-$("#user_name").on({
-	keyup: function(e) {
-		$(this).removeClass("error");
-		$("div#channel_input > .info")
-			.hide()
-			.html("");
-		if (e.keyCode === 13) {
-			selectChannel($(this).val());
-		}
-	},
-	click: function() {
-		$(this).removeClass("error");
-		$("div#channel_input > .info")
-			.hide()
-			.html("");
-		$("#user_name").select();
-	}
-});
-$("#sbm").on("click", function() {
-	selectChannel($("#user_name").val());
-});
-$(window).on("load", function() {
-	$("#user_name").val(default_user_name);
-	$("#user_name").focus();
-});
-// lazy load
-$("#yt_list").on("scroll", function() {
-	if (
-		Math.round($(this).scrollTop() + $(this).innerHeight(), 10) >=
-		Math.round($(this)[0].scrollHeight, 10) - 5
-	) {
-		$("#load-more").trigger("click");
-	}
-});
-
-</script>
-
+<script src="script.js"></script>
 
 </body>
 </html>
