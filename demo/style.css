@@ -36,7 +36,7 @@ a {
 }
 .card, #load-more {margin-top:20px;}
 .card-title {margin-top:20px; text-align:center;}
-.videolist {margin-bottom:24px;}
+.videolist {margin-bottom:24px; background: transparent!important;}
 #yt_player {
 	position: absolute;
 	width: 100%;
