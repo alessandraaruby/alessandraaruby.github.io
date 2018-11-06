@@ -51,7 +51,7 @@ function getVideos(yt_id, next_page = "") {
 					data.nextPageToken +
 					'" data-yt-id="' +
 					yt_id +
-					'">Load more videos</button>';
+					'">Load more video</button>';
 			}
 
 			if (next_page === "") {
