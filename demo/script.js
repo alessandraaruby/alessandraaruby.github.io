@@ -1,4 +1,4 @@
-var default_user_name = "UC98B96y9WwPF3l_naVlLU2Q";
+var default_user_name = "TheSunniWayAhlusSunnahwaljamaah";
 selectChannel(default_user_name);
 /* API */
 function selectChannel(user_name) {
